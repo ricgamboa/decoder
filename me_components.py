@@ -3,8 +3,6 @@
 
 import secrets
 
-import rw_database
-
 
 class Sender:
     # Sender is the user that will send encrypted characters
@@ -14,13 +12,6 @@ class Sender:
         self.name = name
         self.icons = []
         self.cell = 0
-
-    def save_info(self):
-        sid = str(self.id)
-        name = str(self.name)
-        icons = str(self.icons)
-        cell = str(self.cell)
-        rw_database.save_sender(sid, name, icons, cell)
 
     def find_icon(self, position_list):
         # find the icon with a given position list
@@ -120,14 +111,3 @@ class Question:
         position_list = PositionList(len(new_pos), 1)
         position_list.list = new_pos
         self.pos_list_set.append(position_list)
-
-    def save_info(self):
-        qid = str(self.id)
-        num_answer_letters = str(self.num_answer_letters)
-        icons_set = []
-        for icons in self.icons_set:
-            icons_set.append(str(icons.collection))
-        pos_list_set = []
-        for pos_list in self.pos_list_set:
-            pos_list_set.append(str(pos_list.list))
-        rw_database.save_question(qid, num_answer_letters, icons_set, pos_list_set)
